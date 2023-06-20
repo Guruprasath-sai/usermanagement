@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -43,7 +44,11 @@ public class UserValidator {
         validateEmail(userPutDTO.getEmail(), errorMap);
         validateJobRole(userPutDTO.getJobRole(), errorMap);
         validatePassword(userPutDTO.getPassword(), errorMap);
-        validateUserId(userPutDTO.getUserId(), errorMap);
+        if ((Objects.nonNull(userPutDTO.getUserId()))) {
+            validateUserId(userPutDTO.getUserId(), errorMap);
+        } else {
+            errorMap.put("Error-1007", "User id cannot be null");
+        }
         return errorMap;
     }
 
@@ -58,6 +63,8 @@ public class UserValidator {
             if (firstName.length() > 50) {
                 errorMap.put("Error-1001", "firstName size should be between 1 and 50");
             }
+        } else {
+            errorMap.put("Error-1001", "firstName cannot be null");
         }
     }
 
@@ -72,6 +79,8 @@ public class UserValidator {
             if (lastName.length() > 50) {
                 errorMap.put("Error-1002", "lastName size should be between 1 and 50");
             }
+        } else {
+            errorMap.put("Error-1001", "lastName cannot be null");
         }
     }
 
@@ -87,6 +96,8 @@ public class UserValidator {
             if (!mobile.matches(pattern)) {
                 errorMap.put("Error-1003", "mobile number size should be between 1 and 10");
             }
+        } else {
+            errorMap.put("Error-1003", "mobile number cannot be null");
         }
     }
 
@@ -102,6 +113,8 @@ public class UserValidator {
             if (!email.matches(pattern)) {
                 errorMap.put("Error-1004", "email should be in a valid format");
             }
+        } else {
+            errorMap.put("Error-1004", "email cannot be null");
         }
     }
 
@@ -116,6 +129,8 @@ public class UserValidator {
             if (jobRole.length() > 50) {
                 errorMap.put("Error-1005", "jobRole size should be between 1 and 50");
             }
+        } else {
+            errorMap.put("Error-1005", "jobRole cannot be null");
         }
     }
 
@@ -130,6 +145,8 @@ public class UserValidator {
             if (!PasswordValidator.isValidPassword(password)) {
                 errorMap.put("Error-1006", "Password should be alphanumeric with special characters");
             }
+        } else {
+            errorMap.put("Error-1006", "Password cannot be null");
         }
     }
 
