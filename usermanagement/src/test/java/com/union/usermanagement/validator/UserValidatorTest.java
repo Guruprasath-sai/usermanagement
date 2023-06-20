@@ -42,7 +42,9 @@ public class UserValidatorTest {
     @Test
     public void testValidate() {
         userValidator.validateUser(mockFailUser());
+        userValidator.validateUser(new UserDTO());
         userValidator.validateUpdateUser(mockFailUpdateUser());
+        userValidator.validateUpdateUser(new UserPutDTO());
         passwordValidator.isValidPassword("pass");
         passwordValidator.isValidPassword("password");
         passwordValidator.isValidPassword("PASSWORD");
