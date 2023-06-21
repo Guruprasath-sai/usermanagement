@@ -80,7 +80,7 @@ public class UserValidator {
                 errorMap.put("Error-1002", "lastName size should be between 1 and 50");
             }
         } else {
-            errorMap.put("Error-1001", "lastName cannot be null");
+            errorMap.put("Error-1002", "lastName cannot be null");
         }
     }
 
